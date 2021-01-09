@@ -13,7 +13,7 @@ public class start : MonoBehaviour
     public int sceneIndex = 1; //要載入的Scene
     public static start instance;
     public InputField IPaddress;
-    private void Awake()
+    /*private void Awake()
     {
         if (instance == null)
         {
@@ -24,7 +24,7 @@ public class start : MonoBehaviour
             Debug.Log("Instance already exists, destroying object!");
             Destroy(this);
         }
-    }
+    }*/
 
     public void ClickEvent()
     {

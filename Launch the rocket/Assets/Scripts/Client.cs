@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Net;
 using System.Net.Sockets;
 using System;
+using UnityEngine.UI;
 
 public class Client : MonoBehaviour
 {
@@ -15,11 +16,19 @@ public class Client : MonoBehaviour
     public int myId = 0;
     public TCP tcp;
     public UDP udp;
+    public Text ipText;
 
     private bool isConnected = false;
 
     private delegate void PacketHandler(Packet _packet);
     private static Dictionary<int, PacketHandler> packetHandlers;
+
+    public void ChangeIP(){ //triggered when start button is clicked
+        if(ipText.text!=""){ //if there is no text, then ip will connect to local host
+            ip = ipText.text;
+        }
+        ConnectToServer();
+    }
 
     private void Awake()
     {
