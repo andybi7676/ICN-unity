@@ -4,6 +4,8 @@ using System;
 
 public class ProgressBar : FillBar {
 
+    public static ProgressBar instance;
+
     public CPB coalSlider;
     public CPB waterSlider;
     public CPB metalSlider;
@@ -22,10 +24,26 @@ public class ProgressBar : FillBar {
         set {
             // If the value exceeds the max fill, invoke the completion function
             if (value >= slider.maxValue)
+            {
                 onProgressComplete.Invoke();
+                OnProgressComplete();
+            }
 
             // Remove any overfill (i.e. 105% fill -> 5% fill)
             base.CurrentValue = value % slider.maxValue;
+        }
+    }
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Debug.Log("Instance already exists, destroying object!");
+            Destroy(this);
         }
     }
 
@@ -41,11 +59,11 @@ public class ProgressBar : FillBar {
         coal = coalSlider.GetAmount();
         metal = metalSlider.GetAmount();
         // Maybe change to divide 3 not take minnimum
-        CurrentValue = Math.Min(water,Math.Min(coal,metal));
+        CurrentValue = (water + coal + metal)/3;
     }
 
     // The method to call when the progress bar fills up
     void OnProgressComplete() {
-        // Debug.Log("Progress Complete");
+        Debug.Log("Progress Complete");
     }
 }
