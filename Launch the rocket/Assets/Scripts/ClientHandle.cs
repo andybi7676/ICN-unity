@@ -39,15 +39,15 @@ public class ClientHandle : MonoBehaviour
     {
         Vector3 _progressBar = _packet.ReadVector3();
         Debug.Log("ProgressBar: " + _progressBar);
-        if(_progressBar.x > 0)
+        if(_progressBar.x >= 0)
         {
             ProgressBar.instance.coalSlider.SetAmount((int)_progressBar.x);
         }
-        if(_progressBar.y > 0)
+        if(_progressBar.y >= 0)
         {
             ProgressBar.instance.waterSlider.SetAmount((int)_progressBar.y);
         }
-        if(_progressBar.z > 0)
+        if(_progressBar.z >= 0)
         {
             ProgressBar.instance.metalSlider.SetAmount((int)_progressBar.z);
         }

@@ -47,14 +47,16 @@ public class ProgressBar : FillBar {
         }
     }
 
-    void Start () {
+    void Start ()
+    {
         // Initialize onProgressComplete and set a basic callback
         if (onProgressComplete == null)
             onProgressComplete = new UnityEvent();
         onProgressComplete.AddListener(OnProgressComplete);
     }
 
-    void Update () {
+    void Update () 
+    {
         water = waterSlider.GetAmount();
         coal = coalSlider.GetAmount();
         metal = metalSlider.GetAmount();
