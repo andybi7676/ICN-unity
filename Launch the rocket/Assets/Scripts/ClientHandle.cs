@@ -35,6 +35,12 @@ public class ClientHandle : MonoBehaviour
         GameManager.players[_id].transform.GetChild(2).GetComponent<Rigidbody2D>().MovePosition(new Vector3(_position.x, _position.y, GameManager.players[_id].transform.GetChild(2).position.z));
     }
 
+    public static void PlayerDisconnected(Packet _packet){
+        int _id = _packet.ReadInt();
+        Destroy(GameManager.players[_id]);
+        GameManager.players.Remove(_id);
+    }
+
     /*public static void PlayerRotation(Packet _packet)
     {
         int _id = _packet.ReadInt();
