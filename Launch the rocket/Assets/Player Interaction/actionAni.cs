@@ -15,7 +15,7 @@ public class actionAni : MonoBehaviour
     public Animation animation;
     public CharacterStats cs;
     public Rigidbody2D rb;
-    public static int increment = 30;
+    public static int increment = 100;
 
     public CPB coalSlider;
     public CPB waterSlider;
