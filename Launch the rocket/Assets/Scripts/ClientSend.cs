@@ -30,13 +30,26 @@ public class ClientSend : MonoBehaviour
     }
     
 
-    public static void PlayerMovement (Vector2 position){
-        using (Packet _packet = new Packet((int)ClientPackets.playerMovement)){
+    public static void PlayerMovement (Vector2 position)
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.playerMovement))
+        {
             _packet.Write(position);
 
             SendUDPData(_packet);
         }
         
+    }
+
+    public static void PlayerCollection (Vector3 _collection)
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.playerCollection))
+        {
+            _packet.Write(0);
+            _packet.Write(_collection);
+
+            SendTCPData(_packet);
+        }
     }
     #endregion
 }

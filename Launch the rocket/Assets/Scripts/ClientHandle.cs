@@ -35,6 +35,29 @@ public class ClientHandle : MonoBehaviour
         GameManager.players[_id].transform.GetChild(2).GetComponent<Rigidbody2D>().MovePosition(new Vector3(_position.x, _position.y, GameManager.players[_id].transform.GetChild(2).position.z));
     }
 
+    public static void PlayerDisconnected(Packet _packet){
+        int _id = _packet.ReadInt();
+        Destroy(GameManager.players[_id]);
+        GameManager.players.Remove(_id);
+    }
+    public static void PlayerProgressBar(Packet _packet)
+    {
+        Vector3 _progressBar = _packet.ReadVector3();
+        Debug.Log("ProgressBar: " + _progressBar);
+        if(_progressBar.x >= 0)
+        {
+            ProgressBar.instance.coalSlider.SetAmount((int)_progressBar.x);
+        }
+        if(_progressBar.y >= 0)
+        {
+            ProgressBar.instance.waterSlider.SetAmount((int)_progressBar.y);
+        }
+        if(_progressBar.z >= 0)
+        {
+            ProgressBar.instance.metalSlider.SetAmount((int)_progressBar.z);
+        }
+    }
+
     /*public static void PlayerRotation(Packet _packet)
     {
         int _id = _packet.ReadInt();
