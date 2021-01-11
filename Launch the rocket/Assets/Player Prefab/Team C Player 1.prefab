@@ -277,6 +277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   username: 
+  hud: {fileID: 8765397464725202488}
 --- !u!1 &8765397466009434112
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,22 +486,37 @@ PrefabInstance:
     - target: {fileID: 94062847521629286, guid: ac6e4b6b537ce46c380ebd09a6471f4d,
         type: 3}
       propertyPath: m_Value
-      value: 0.086
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1970313071242883869, guid: ac6e4b6b537ce46c380ebd09a6471f4d,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1970313071478294363, guid: ac6e4b6b537ce46c380ebd09a6471f4d,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1970313071921882504, guid: ac6e4b6b537ce46c380ebd09a6471f4d,
         type: 3}
       propertyPath: m_FillAmount
-      value: 0.51
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1970313072488110522, guid: ac6e4b6b537ce46c380ebd09a6471f4d,
         type: 3}
       propertyPath: m_FillAmount
-      value: 0.253
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1970313072783273468, guid: ac6e4b6b537ce46c380ebd09a6471f4d,
         type: 3}
       propertyPath: m_FillAmount
-      value: 0.31
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1970313072832515887, guid: ac6e4b6b537ce46c380ebd09a6471f4d,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8959149889604037857, guid: ac6e4b6b537ce46c380ebd09a6471f4d,
         type: 3}
@@ -619,6 +635,12 @@ PrefabInstance:
       objectReference: {fileID: 8765397466409827944}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac6e4b6b537ce46c380ebd09a6471f4d, type: 3}
+--- !u!1 &8765397464725202488 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8959149889604037857, guid: ac6e4b6b537ce46c380ebd09a6471f4d,
+    type: 3}
+  m_PrefabInstance: {fileID: 428327772568029913}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8765397464725202468 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8959149889604037885, guid: ac6e4b6b537ce46c380ebd09a6471f4d,

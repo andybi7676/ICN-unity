@@ -15,7 +15,7 @@ public class actionAni : MonoBehaviour
     public Animation animation;
     public CharacterStats cs;
     public Rigidbody2D rb;
-    public int increment;
+    public int increment = 10;
 
     public CPB coalSlider;
     public CPB waterSlider;
@@ -62,28 +62,28 @@ public class actionAni : MonoBehaviour
             StartCoroutine(actionTime());
         }
         if (aaa.gameObject.tag == "Metal" && Input.GetKeyDown(KeyCode.Space)){
-          anim.SetBool("metal",true);
-          rb.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
-          anim.SetBool("increase_metal",true);
-          StartCoroutine(actionTime());
+            anim.SetBool("metal",true);
+            rb.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
+            anim.SetBool("increase_metal",true);
+            StartCoroutine(actionTime());
         }
         if (aaa.gameObject.tag == "lab" && Input.GetKeyDown(KeyCode.Space)){
-          anim.SetBool("develop",false);
-          if(anim.GetBool("increase_coal")){
-            //Vector3 _localCollection = new Vector3(increment,0,0);
-            coalSlider.UpdateAmount(increment);
-            anim.SetBool("increase_coal",false);
-          }
-          if(anim.GetBool("increase_metal")){
-            //Vector3 _localCollection = new Vector3(0,increment,0);
-            metalSlider.UpdateAmount(increment);
-            anim.SetBool("increase_metal",false);
-          }
-          if(anim.GetBool("increase_water")){
-            //Vector3 _localCollection = new Vector3(0, 0, increment);
-            waterSlider.UpdateAmount(increment);
-            anim.SetBool("increase_water",false);
-          }
+            anim.SetBool("develop",false);
+            if(anim.GetBool("increase_coal")){
+                ClientSend.PlayerCollection(new Vector3(increment, 0, 0));
+                coalSlider.UpdateAmount(increment);
+                anim.SetBool("increase_coal",false);
+            }
+            if(anim.GetBool("increase_metal")){
+                ClientSend.PlayerCollection(new Vector3(0, 0, increment));
+                metalSlider.UpdateAmount(increment);
+                anim.SetBool("increase_metal",false);
+            }
+            if(anim.GetBool("increase_water")){
+                ClientSend.PlayerCollection(new Vector3(0, increment, 0));
+                waterSlider.UpdateAmount(increment);
+                anim.SetBool("increase_water",false);
+            }
         }
 
     }

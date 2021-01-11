@@ -66,7 +66,7 @@ public class playerMovement : MonoBehaviour
     // }
 
     void FixedUpdate(){
-      if (Client.instance.myId!= transform.parent.GetComponent<PlayerManager>().id){
+      if (Client.instance.myId != transform.parent.GetComponent<PlayerManager>().id){
           return;
       }
       Vector2 position = rigidbody2d.position;
