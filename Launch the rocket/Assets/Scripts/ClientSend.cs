@@ -51,5 +51,13 @@ public class ClientSend : MonoBehaviour
             SendTCPData(_packet);
         }
     }
+
+    public static void PlayerClockInit()
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.playerClockStart))
+        {
+            SendTCPData(_packet);
+        }
+    }
     #endregion
 }

@@ -5,14 +5,16 @@ using UnityEngine.UI;
 
 public class countdownTimer : MonoBehaviour
 {
-    public float timeRemaining = 10;
-    public bool timerIsRunning = false;
+    public static float timeRemaining = 300;
+    public static bool timerIsRunning = false;
     public Text timeText;
 
     private void Start()
     {
         // Starts the timer automatically
         timerIsRunning = true;
+        Debug.Log(timeRemaining);
+        ClientSend.PlayerClockInit();
     }
 
     void Update()
@@ -22,6 +24,7 @@ public class countdownTimer : MonoBehaviour
             if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
+                Debug.Log(Time.deltaTime);
                 DisplayTime(timeRemaining);
             }
             else
@@ -30,6 +33,15 @@ public class countdownTimer : MonoBehaviour
                 timeRemaining = 0;
                 timerIsRunning = false;
             }
+        }
+    }
+
+    public static void SetTimeRemaining(float _remainTime)
+    {
+        if (timerIsRunning)
+        {
+            Debug.Log("set time: " + _remainTime);
+            timeRemaining = _remainTime;
         }
     }
 

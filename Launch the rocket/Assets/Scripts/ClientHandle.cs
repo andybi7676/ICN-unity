@@ -58,6 +58,16 @@ public class ClientHandle : MonoBehaviour
         }
     }
 
+    public static void PlayerClock(Packet _packet)
+    {
+        float remainTime = _packet.ReadFloat();
+        if(remainTime >= 0)
+        {
+            Debug.Log(remainTime);
+            countdownTimer.SetTimeRemaining(remainTime);
+        }
+    }
+
     /*public static void PlayerRotation(Packet _packet)
     {
         int _id = _packet.ReadInt();

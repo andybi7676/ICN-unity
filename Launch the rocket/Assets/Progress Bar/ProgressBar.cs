@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using System;
+using UnityEngine.SceneManagement; //SceneManager
 
 public class ProgressBar : FillBar {
 
@@ -67,5 +68,6 @@ public class ProgressBar : FillBar {
     // The method to call when the progress bar fills up
     void OnProgressComplete() {
         Debug.Log("Progress Complete");
+        SceneManager.LoadScene(2);
     }
 }
