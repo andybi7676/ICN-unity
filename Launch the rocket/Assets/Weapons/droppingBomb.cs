@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class droppingBomb : MonoBehaviour
 {
-    [SerializeField]private GameObject bombPrefab;
+    [SerializeField]public GameObject bombPrefab;
     public Animator player;
     public Rigidbody2D rb;
 
     // Update is called once per frame
     void Update()
     {
+      if (Client.instance.myId!= transform.parent.GetComponent<PlayerManager>().id){
+        return;
+      }
       if(Input.GetKeyDown(KeyCode.B)){
         DropBomb();
+        ClientSend.DropBomb(this.gameObject.transform.position);
       }
     }
 

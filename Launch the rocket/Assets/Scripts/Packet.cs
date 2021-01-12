@@ -8,14 +8,15 @@ using UnityEngine;
 public enum ServerPackets
 {
     welcome = 1,
-    spawnPlayer,
-    playerPosition,
-    playerProgressBar,
-    playerDisconnected,
-    playerRotation,
-    playerUseWeapon,
-    gunRotation,
-    spawnBullet
+    spawnPlayer = 2,
+    playerPosition = 3,
+    playerProgressBar = 4,
+    playerDisconnected = 5,
+    playerRotation = 6,
+    playerUseWeapon = 7,
+    gunRotation = 8,
+    spawnBullet = 9,
+    dropBomb = 10
 }
 
 /// <summary>Sent from client to server.</summary>
@@ -25,7 +26,9 @@ public enum ClientPackets
     playerMovement = 2,
     playerCollection = 3,
     playerUseWeapon = 4,
-    gunRotation = 5
+    gunRotation = 5,
+    spawnBullet = 6,
+    dropBomb = 7
 }
 
 public class Packet : IDisposable

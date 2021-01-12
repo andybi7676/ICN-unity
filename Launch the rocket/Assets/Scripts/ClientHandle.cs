@@ -65,7 +65,8 @@ public class ClientHandle : MonoBehaviour
         if (useWeapon){
             Vector3 pos = _packet.ReadVector3();
             //GameObject weapon = Instantiate(GameManager.players[_id].transform.GetChild(2).GetComponent<playerMovement>().gun, pos, Quaternion.identity, GameManager.players[_id].transform.GetChild(2));
-            GameObject weapon = Instantiate(GameManager.players[_id].transform.GetChild(2).GetComponent<playerMovement>().gun, GameManager.players[_id].transform.GetChild(2).GetComponent<playerMovement>().weaponSpawnPoint.position, Quaternion.identity, GameManager.players[_id].transform.GetChild(2));
+            Transform astronaut = GameManager.players[_id].transform.GetChild(2);
+            GameObject weapon = Instantiate(astronaut.GetComponent<playerMovement>().gun, astronaut.GetComponent<playerMovement>().weaponSpawnPoint.position, Quaternion.identity, astronaut);
             weapon.transform.localScale = new Vector3(2.5f, 2.5f, 0.5f);
         }
         else{
@@ -77,6 +78,27 @@ public class ClientHandle : MonoBehaviour
         int _id = _packet.ReadInt();
         Quaternion rot = _packet.ReadQuaternion();
         GameManager.players[_id].transform.GetChild(2).GetChild(1).rotation = rot;    
+    }
+
+    public static void SpawnBullet(Packet _packet){
+        int _id = _packet.ReadInt();
+        Vector3 shootPos = _packet.ReadVector3();
+        Quaternion shootRot = _packet.ReadQuaternion();
+
+        Transform gun = GameManager.players[_id].transform.GetChild(2).GetChild(1);
+        Weapon gunScript = gun.GetComponent<Weapon>();
+        //Instantiate(gunScript.shotEffect, gunScript.shotPoint.position, Quaternion.identity);
+        //Instantiate(gunScript.projectile, gunScript.shotPoint.position, gun.rotation);
+        Instantiate(gunScript.shotEffect, shootPos, Quaternion.identity);
+        Instantiate(gunScript.projectile, shootPos, shootRot);
+    }
+
+    public static void DropBomb(Packet _packet){
+        int _id = _packet.ReadInt();
+        Vector3 dropPos = _packet.ReadVector3();
+
+        droppingBomb player = GameManager.players[_id].transform.GetChild(2).GetComponent<droppingBomb>();
+        Instantiate(player.bombPrefab, dropPos,Quaternion.identity);
     }
 
 

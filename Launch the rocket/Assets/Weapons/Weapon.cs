@@ -44,7 +44,7 @@ public class Weapon : MonoBehaviour {
                 Instantiate(shotEffect, shotPoint.position, Quaternion.identity);
                 // camAnim.SetTrigger("shake");
                 Instantiate(projectile, shotPoint.position, transform.rotation);
-                //ClientSend.SpawnBullet(shotPoint.position, transform.rotation);
+                ClientSend.SpawnBullet(shotPoint.position, transform.rotation);
                 timeBtwShots = startTimeBtwShots;
             }
         }

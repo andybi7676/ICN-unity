@@ -72,16 +72,26 @@ public class ClientSend : MonoBehaviour
         }
     }
 
-    /*public static void SpawnBullet (Vector3 shotPos, Quaternion shotRot)
+    public static void SpawnBullet (Vector3 shootPos, Quaternion shootRot)
     {
         using (Packet _packet = new Packet((int)ClientPackets.spawnBullet))
         {
-            _packet.Write(shotPos);
-            _packet.Write(shotRot);
+            _packet.Write(shootPos);
+            _packet.Write(shootRot);
 
             SendTCPData(_packet);
         }
-    }*/
+    }
+
+    public static void DropBomb (Vector3 dropPos)
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.dropBomb))
+        {
+            _packet.Write(dropPos);
+
+            SendTCPData(_packet);
+        }
+    }
 
     #endregion
 }
