@@ -15,6 +15,9 @@ public class facingDirection : MonoBehaviour
 
     void Update()
     {
+        if (Client.instance.myId!= transform.parent.GetComponent<PlayerManager>().id){
+            return;
+        }
         // store movement from horizontal axis of controller
         Vector2 move = Vector2.zero;
         move.x = Input.GetAxis("Horizontal");

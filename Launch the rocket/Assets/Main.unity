@@ -718,6 +718,7 @@ MonoBehaviour:
     type: 3}
   playerPrefab: {fileID: 2193746078279999757, guid: 4e387f59837324741bce7fc63364969c,
     type: 3}
+  gun: {fileID: 8486146565223683582, guid: 73ff4acef504c574eb652300aa2f6cd8, type: 3}
 --- !u!4 &270352785
 Transform:
   m_ObjectHideFlags: 0

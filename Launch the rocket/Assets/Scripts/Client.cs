@@ -293,6 +293,10 @@ public class Client : MonoBehaviour
             { (int)ServerPackets.playerProgressBar , ClientHandle.PlayerProgressBar },
             //{ (int)ServerPackets.playerRotation, ClientHandle.PlayerRotation },
             { (int)ServerPackets.playerDisconnected, ClientHandle.PlayerDisconnected },
+            { (int)ServerPackets.playerUseWeapon, ClientHandle.PlayerUseWeapon },
+            { (int)ServerPackets.gunRotation, ClientHandle.GunRotation },
+            { (int)ServerPackets.spawnBullet, ClientHandle.SpawnBullet },
+            { (int)ServerPackets.dropBomb, ClientHandle.DropBomb },
             { (int)ServerPackets.playerClock, ClientHandle.PlayerClock },
             { (int)ServerPackets.playerActionCollect, ClientHandle.PlayerActionCollect },
         };

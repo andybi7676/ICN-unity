@@ -38,7 +38,6 @@ public class ClientSend : MonoBehaviour
 
             SendUDPData(_packet);
         }
-        
     }
 
     public static void PlayerCollection (Vector3 _collection)
@@ -59,6 +58,37 @@ public class ClientSend : MonoBehaviour
             SendTCPData(_packet);
         }
     }
+    
+    public static void PlayerUseWeapon(bool useWeapon, Vector3 pos){
+        using (Packet _packet = new Packet((int)ClientPackets.playerUseWeapon))
+        {
+            _packet.Write(useWeapon);
+
+            if(useWeapon){
+                _packet.Write(pos);
+            }
+            SendTCPData(_packet);
+        }
+    }
+
+    public static void GunRotation(Quaternion rot){
+        using (Packet _packet = new Packet((int)ClientPackets.gunRotation))
+        {
+            _packet.Write(rot);
+            SendUDPData(_packet);
+        }
+    }
+
+    public static void SpawnBullet (Vector3 shootPos, Quaternion shootRot)
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.spawnBullet))
+        {
+            _packet.Write(shootPos);
+            _packet.Write(shootRot);
+
+            SendTCPData(_packet);
+        }
+    }
 
     public static void PlayerCollected(string _resource)
     {
@@ -70,5 +100,16 @@ public class ClientSend : MonoBehaviour
         }
         Debug.Log($"Collect {_resource}");
     }
+
+    public static void DropBomb (Vector3 dropPos)
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.dropBomb))
+        {
+            _packet.Write(dropPos);
+
+            SendTCPData(_packet);
+        }
+    }
+
     #endregion
 }

@@ -8,13 +8,17 @@ using UnityEngine;
 public enum ServerPackets
 {
     welcome = 1,
-    spawnPlayer,
-    playerPosition,
-    playerProgressBar,
-    playerDisconnected,
+    spawnPlayer = 2,
+    playerPosition = 3,
+    playerProgressBar = 4,
+    playerDisconnected = 5,
+    playerRotation = 6,
+    playerUseWeapon = 7,
+    gunRotation = 8,
+    spawnBullet = 9,
+    dropBomb = 10,
     playerClock,
     playerActionCollect,
-    playerRotation
 }
 
 /// <summary>Sent from client to server.</summary>
@@ -23,8 +27,12 @@ public enum ClientPackets
     welcomeReceived = 1,
     playerMovement = 2,
     playerCollection = 3,
-    playerClockStart = 4,
-    playerActionCollect = 5,
+    playerUseWeapon = 4,
+    gunRotation = 5,
+    spawnBullet = 6,
+    dropBomb = 7,
+    playerClockStart = 8,
+    playerActionCollect = 9,
 }
 
 public class Packet : IDisposable

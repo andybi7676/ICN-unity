@@ -41,12 +41,14 @@ public class playerMovement : MonoBehaviour
               currentWeapon = Instantiate(gun, weaponSpawnPoint.position, Quaternion.identity);
               currentWeapon.transform.parent = gameObject.transform;
               isUsingWeapon = true;
+              ClientSend.PlayerUseWeapon(true, weaponSpawnPoint.position);
             }
         }
         else {
             if(Input.GetKeyDown(KeyCode.G)){
               Destroy(currentWeapon);
               isUsingWeapon = false;
+              ClientSend.PlayerUseWeapon(false, new Vector3(0, 0, 0));
             }
         }
     }

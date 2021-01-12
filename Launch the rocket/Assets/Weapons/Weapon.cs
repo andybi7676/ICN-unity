@@ -17,6 +17,9 @@ public class Weapon : MonoBehaviour {
 
     private void Update()
     {
+        if (Client.instance.myId!= transform.parent.parent.GetComponent<PlayerManager>().id){
+          return;
+        }
         // Handles the weapon facing direction
         // facingDirection facingDirection = Player.GetComponent<facingDirection>();
         // if (facingDirection.facing == "left")
@@ -32,6 +35,7 @@ public class Weapon : MonoBehaviour {
         Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, rotZ + offset);
+        ClientSend.GunRotation(transform.rotation);
 
         if (timeBtwShots <= 0)
         {
@@ -40,6 +44,7 @@ public class Weapon : MonoBehaviour {
                 Instantiate(shotEffect, shotPoint.position, Quaternion.identity);
                 // camAnim.SetTrigger("shake");
                 Instantiate(projectile, shotPoint.position, transform.rotation);
+                ClientSend.SpawnBullet(shotPoint.position, transform.rotation);
                 timeBtwShots = startTimeBtwShots;
             }
         }

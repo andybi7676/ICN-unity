@@ -29,21 +29,21 @@ public class actionAni : MonoBehaviour
     }
 
     void Update(){
-        if (Client.instance.myId != transform.parent.GetComponent<PlayerManager>().id)
-        {
-            return;
-        }
-        if (Input.GetButtonDown("Horizontal")||Input.GetButtonDown("Vertical")){
-            cs = CharacterStats.Walk;
-        }else if(Input.GetButtonUp("Horizontal")||Input.GetButtonUp("Vertical")){
-            cs = CharacterStats.Idle;
-        }
-        if(cs == CharacterStats.Idle){
-            anim.SetBool("walk",false);
-        }
-        if(cs == CharacterStats.Walk){
-            anim.SetBool("walk",true);
-        }
+      if (Client.instance.myId!= transform.parent.GetComponent<PlayerManager>().id){
+        return;
+      }
+
+      if(Input.GetButtonDown("Horizontal")||Input.GetButtonDown("Vertical")){
+        cs = CharacterStats.Walk;
+      }else if(Input.GetButtonUp("Horizontal")||Input.GetButtonUp("Vertical")){
+        cs = CharacterStats.Idle;
+      }
+      if(cs == CharacterStats.Idle){
+        anim.SetBool("walk",false);
+      }
+      if(cs == CharacterStats.Walk){
+        anim.SetBool("walk",true);
+      }
     }
 
     IEnumerator actionTime(){
@@ -61,10 +61,8 @@ public class actionAni : MonoBehaviour
     // Start the animation while colliding and pressing Space
     void OnCollisionStay2D(Collision2D aaa) //aaa為自定義碰撞事件
     {
-        if (Client.instance.myId != transform.parent.GetComponent<PlayerManager>().id)
-        {
-            Debug.Log("not collect !");
-            return;
+        if (Client.instance.myId!= transform.parent.GetComponent<PlayerManager>().id){
+          return;
         }
         if (aaa.gameObject.tag == "Coal" && Input.GetKeyDown(KeyCode.Space)){
             anim.SetBool("coal",true);
