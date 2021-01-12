@@ -29,42 +29,55 @@ public class actionAni : MonoBehaviour
     }
 
     void Update(){
-      if(Input.GetButtonDown("Horizontal")||Input.GetButtonDown("Vertical")){
-        cs = CharacterStats.Walk;
-      }else if(Input.GetButtonUp("Horizontal")||Input.GetButtonUp("Vertical")){
-        cs = CharacterStats.Idle;
-      }
-      if(cs == CharacterStats.Idle){
-        anim.SetBool("walk",false);
-      }
-      if(cs == CharacterStats.Walk){
-        anim.SetBool("walk",true);
-      }
+        if (Client.instance.myId != transform.parent.GetComponent<PlayerManager>().id)
+        {
+            return;
+        }
+        if (Input.GetButtonDown("Horizontal")||Input.GetButtonDown("Vertical")){
+            cs = CharacterStats.Walk;
+        }else if(Input.GetButtonUp("Horizontal")||Input.GetButtonUp("Vertical")){
+            cs = CharacterStats.Idle;
+        }
+        if(cs == CharacterStats.Idle){
+            anim.SetBool("walk",false);
+        }
+        if(cs == CharacterStats.Walk){
+            anim.SetBool("walk",true);
+        }
     }
 
     IEnumerator actionTime(){
-      yield return new WaitForSeconds(2);
-      anim.SetBool("coal",false);
-      anim.SetBool("metal",false);
-      anim.SetBool("water",false);
-      anim.SetBool("develop",true);
-      yield return new WaitForSeconds(1);
-      rb.constraints &= ~RigidbodyConstraints2D.FreezePosition;
+        yield return new WaitForSeconds(2);
+        Debug.Log("animation!");
+        anim.SetBool("coal",false);
+        anim.SetBool("metal",false);
+        anim.SetBool("water",false);
+        anim.SetBool("develop",true);
+        anim.SetBool("walk", false);
+        yield return new WaitForSeconds(1);
+        rb.constraints &= ~RigidbodyConstraints2D.FreezePosition;
     }
 
     // Start the animation while colliding and pressing Space
     void OnCollisionStay2D(Collision2D aaa) //aaa為自定義碰撞事件
     {
+        if (Client.instance.myId != transform.parent.GetComponent<PlayerManager>().id)
+        {
+            Debug.Log("not collect !");
+            return;
+        }
         if (aaa.gameObject.tag == "Coal" && Input.GetKeyDown(KeyCode.Space)){
             anim.SetBool("coal",true);
             rb.constraints = RigidbodyConstraints2D.FreezePosition| RigidbodyConstraints2D.FreezeRotation;
             anim.SetBool("increase_coal",true);
+            ClientSend.PlayerCollected("coal");
             StartCoroutine(actionTime());
         }
         if (aaa.gameObject.tag == "Metal" && Input.GetKeyDown(KeyCode.Space)){
             anim.SetBool("metal",true);
             rb.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
             anim.SetBool("increase_metal",true);
+            ClientSend.PlayerCollected("metal");
             StartCoroutine(actionTime());
         }
         if (aaa.gameObject.tag == "lab" && Input.GetKeyDown(KeyCode.Space)){
@@ -85,14 +98,62 @@ public class actionAni : MonoBehaviour
                 anim.SetBool("increase_water",false);
             }
         }
+    }
 
+    public void MakeCollected(string _resource)
+    {
+        anim.SetBool("walk", true);
+        if (_resource == "coal")
+        {
+            anim.SetBool("coal", true);
+            rb.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
+            anim.SetBool("increase_coal", true);
+            StartCoroutine(actionTime());
+        }
+        if(_resource == "metal")
+        {
+            anim.SetBool("metal", true);
+            rb.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
+            anim.SetBool("increase_metal", true);
+            StartCoroutine(actionTime());
+        }
+        if(_resource == "water")
+        {
+            anim.SetBool("water", true);
+            rb.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
+            anim.SetBool("increase_water", true);
+            StartCoroutine(actionTime());
+        }
+    }
+
+    public void MakeCollection()
+    {
+        anim.SetBool("develop", false);
+        if (anim.GetBool("increase_coal"))
+        {
+            anim.SetBool("increase_coal", false);
+        }
+        if (anim.GetBool("increase_metal"))
+        {
+            anim.SetBool("increase_metal", false);
+        }
+        if (anim.GetBool("increase_water"))
+        {
+            anim.SetBool("increase_water", false);
+        }
     }
     void OnTriggerStay2D(Collider2D aaa){
-      if (aaa.gameObject.tag == "Water" && Input.GetKeyDown(KeyCode.Space)){
-        anim.SetBool("water",true);
-        rb.constraints = RigidbodyConstraints2D.FreezePosition |RigidbodyConstraints2D.FreezeRotation;
-        anim.SetBool("increase_water",true);
-        StartCoroutine(actionTime());
-      }
+        if (Client.instance.myId != transform.parent.GetComponent<PlayerManager>().id)
+        {
+            Debug.Log("not collect !");
+            return;
+        }
+        if (aaa.gameObject.tag == "Water" && Input.GetKeyDown(KeyCode.Space)){
+            anim.SetBool("water",true);
+            rb.constraints = RigidbodyConstraints2D.FreezePosition |RigidbodyConstraints2D.FreezeRotation;
+            anim.SetBool("increase_water",true);
+            ClientSend.PlayerCollected("water");
+            StartCoroutine(actionTime());
+        }
     }
 }

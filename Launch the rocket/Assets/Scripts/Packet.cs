@@ -13,6 +13,7 @@ public enum ServerPackets
     playerProgressBar,
     playerDisconnected,
     playerClock,
+    playerActionCollect,
     playerRotation
 }
 
@@ -23,6 +24,7 @@ public enum ClientPackets
     playerMovement = 2,
     playerCollection = 3,
     playerClockStart = 4,
+    playerActionCollect = 5,
 }
 
 public class Packet : IDisposable

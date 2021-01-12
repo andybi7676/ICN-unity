@@ -27,7 +27,8 @@ public class playerMovement : MonoBehaviour
     void Update()
     {
         if (Client.instance.myId!= transform.parent.GetComponent<PlayerManager>().id){
-          return;
+            Debug.Log(Client.instance.myId + ", " + transform.parent.GetComponent<PlayerManager>().id);
+            return;
         }
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");

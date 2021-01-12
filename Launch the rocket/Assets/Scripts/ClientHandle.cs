@@ -10,7 +10,7 @@ public class ClientHandle : MonoBehaviour
         string _msg = _packet.ReadString();
         int _myId = _packet.ReadInt();
 
-        Debug.Log($"Message from server: {_msg}");
+        Debug.Log($"Message from server: {_msg}, your id: {_myId}");
         Client.instance.myId = _myId;
         ClientSend.WelcomeReceived();
 
@@ -31,7 +31,7 @@ public class ClientHandle : MonoBehaviour
     {
         int _id = _packet.ReadInt();
         Vector2 _position = _packet.ReadVector2();
-        Debug.Log(_id+ ", pos: "+ _position);
+        //Debug.Log(_id+ ", pos: "+ _position);
         GameManager.players[_id].transform.GetChild(2).GetComponent<Rigidbody2D>().MovePosition(new Vector3(_position.x, _position.y, GameManager.players[_id].transform.GetChild(2).position.z));
     }
 
@@ -42,6 +42,11 @@ public class ClientHandle : MonoBehaviour
     }
     public static void PlayerProgressBar(Packet _packet)
     {
+        int _fromClient = _packet.ReadInt();
+        if(_fromClient != Client.instance.myId && _fromClient != 0)
+        {
+            GameManager.players[_fromClient].transform.GetChild(2).GetComponent<actionAni>().MakeCollection();
+        }
         Vector3 _progressBar = _packet.ReadVector3();
         Debug.Log("ProgressBar: " + _progressBar);
         if(_progressBar.x >= 0)
@@ -63,9 +68,17 @@ public class ClientHandle : MonoBehaviour
         float remainTime = _packet.ReadFloat();
         if(remainTime >= 0)
         {
-            Debug.Log(remainTime);
+            //Debug.Log(remainTime);
             countdownTimer.SetTimeRemaining(remainTime);
         }
+    }
+
+    public static void PlayerActionCollect(Packet _packet)
+    {
+        int _id = _packet.ReadInt();
+        string _resource = _packet.ReadString();
+        Debug.Log(_id + ", collected: " + _resource);
+        GameManager.players[_id].transform.GetChild(2).GetComponent<actionAni>().MakeCollected(_resource);
     }
 
     /*public static void PlayerRotation(Packet _packet)

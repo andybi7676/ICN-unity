@@ -208,7 +208,6 @@ MonoBehaviour:
   animation: {fileID: 0}
   cs: 0
   rb: {fileID: 0}
-  increment: 10
   coalSlider: {fileID: 2208536893100903808}
   waterSlider: {fileID: 2208536891734066676}
   metalSlider: {fileID: 2208536893340498374}
@@ -277,7 +276,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   username: 
-  hud: {fileID: 8765397464725202488}
 --- !u!1 &8765397466009434112
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,12 +638,6 @@ PrefabInstance:
       objectReference: {fileID: 8765397466409827944}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac6e4b6b537ce46c380ebd09a6471f4d, type: 3}
---- !u!1 &8765397464725202488 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8959149889604037857, guid: ac6e4b6b537ce46c380ebd09a6471f4d,
-    type: 3}
-  m_PrefabInstance: {fileID: 428327772568029913}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8765397464725202468 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8959149889604037885, guid: ac6e4b6b537ce46c380ebd09a6471f4d,

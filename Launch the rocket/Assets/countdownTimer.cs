@@ -13,7 +13,6 @@ public class countdownTimer : MonoBehaviour
     {
         // Starts the timer automatically
         timerIsRunning = true;
-        Debug.Log(timeRemaining);
         ClientSend.PlayerClockInit();
     }
 
@@ -24,7 +23,6 @@ public class countdownTimer : MonoBehaviour
             if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
-                Debug.Log(Time.deltaTime);
                 DisplayTime(timeRemaining);
             }
             else
@@ -40,7 +38,7 @@ public class countdownTimer : MonoBehaviour
     {
         if (timerIsRunning)
         {
-            Debug.Log("set time: " + _remainTime);
+            //Debug.Log("set time: " + _remainTime);
             timeRemaining = _remainTime;
         }
     }

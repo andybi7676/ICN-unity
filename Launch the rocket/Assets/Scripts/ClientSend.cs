@@ -45,7 +45,7 @@ public class ClientSend : MonoBehaviour
     {
         using (Packet _packet = new Packet((int)ClientPackets.playerCollection))
         {
-            _packet.Write(0);
+            _packet.Write(true);
             _packet.Write(_collection);
 
             SendTCPData(_packet);
@@ -58,6 +58,17 @@ public class ClientSend : MonoBehaviour
         {
             SendTCPData(_packet);
         }
+    }
+
+    public static void PlayerCollected(string _resource)
+    {
+        using ( Packet _packet = new Packet((int)ClientPackets.playerActionCollect))
+        {
+            _packet.Write(Client.instance.myId);
+            _packet.Write(_resource);
+            SendTCPData(_packet);
+        }
+        Debug.Log($"Collect {_resource}");
     }
     #endregion
 }
