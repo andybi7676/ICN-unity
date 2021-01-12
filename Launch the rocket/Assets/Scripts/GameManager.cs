@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
         }
 
         if (_id != Client.instance.myId){
-            _player.transform.GetChild(2).gameObject.tag = "Player";
+            //_player.transform.GetChild(2).gameObject.tag = "Player";
         }
 
 

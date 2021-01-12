@@ -29,6 +29,10 @@ public class actionAni : MonoBehaviour
     }
 
     void Update(){
+      if (Client.instance.myId!= transform.parent.GetComponent<PlayerManager>().id){
+        return;
+      }
+
       if(Input.GetButtonDown("Horizontal")||Input.GetButtonDown("Vertical")){
         cs = CharacterStats.Walk;
       }else if(Input.GetButtonUp("Horizontal")||Input.GetButtonUp("Vertical")){
@@ -55,6 +59,9 @@ public class actionAni : MonoBehaviour
     // Start the animation while colliding and pressing Space
     void OnCollisionStay2D(Collision2D aaa) //aaa為自定義碰撞事件
     {
+        if (Client.instance.myId!= transform.parent.GetComponent<PlayerManager>().id){
+          return;
+        }
         if (aaa.gameObject.tag == "Coal" && Input.GetKeyDown(KeyCode.Space)){
             anim.SetBool("coal",true);
             rb.constraints = RigidbodyConstraints2D.FreezePosition| RigidbodyConstraints2D.FreezeRotation;

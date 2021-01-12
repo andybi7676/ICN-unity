@@ -8,7 +8,14 @@ public class camerafollow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      playerTransform = GameObject.FindWithTag("LocalPlayer").transform;
+      //playerTransform = GameObject.FindWithTag("LocalPlayer").transform;
+      GameObject[] players = GameObject.FindGameObjectsWithTag("LocalPlayer");
+      foreach (GameObject player in players){
+         if (Client.instance.myId== player.transform.parent.GetComponent<PlayerManager>().id){
+          playerTransform = player.transform;
+          break;
+        } 
+      }
 
     }
 

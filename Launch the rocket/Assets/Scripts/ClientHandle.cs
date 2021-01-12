@@ -58,6 +58,28 @@ public class ClientHandle : MonoBehaviour
         }
     }
 
+    public static void PlayerUseWeapon(Packet _packet){
+        int _id = _packet.ReadInt();
+        bool useWeapon = _packet.ReadBool();
+
+        if (useWeapon){
+            Vector3 pos = _packet.ReadVector3();
+            //GameObject weapon = Instantiate(GameManager.players[_id].transform.GetChild(2).GetComponent<playerMovement>().gun, pos, Quaternion.identity, GameManager.players[_id].transform.GetChild(2));
+            GameObject weapon = Instantiate(GameManager.players[_id].transform.GetChild(2).GetComponent<playerMovement>().gun, GameManager.players[_id].transform.GetChild(2).GetComponent<playerMovement>().weaponSpawnPoint.position, Quaternion.identity, GameManager.players[_id].transform.GetChild(2));
+            weapon.transform.localScale = new Vector3(2.5f, 2.5f, 0.5f);
+        }
+        else{
+            Destroy(GameManager.players[_id].transform.GetChild(2).GetChild(1).gameObject);
+        }
+    }
+
+    public static void GunRotation(Packet _packet){
+        int _id = _packet.ReadInt();
+        Quaternion rot = _packet.ReadQuaternion();
+        GameManager.players[_id].transform.GetChild(2).GetChild(1).rotation = rot;    
+    }
+
+
     /*public static void PlayerRotation(Packet _packet)
     {
         int _id = _packet.ReadInt();

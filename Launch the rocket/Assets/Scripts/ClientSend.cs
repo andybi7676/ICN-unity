@@ -51,5 +51,37 @@ public class ClientSend : MonoBehaviour
             SendTCPData(_packet);
         }
     }
+
+    public static void PlayerUseWeapon(bool useWeapon, Vector3 pos){
+        using (Packet _packet = new Packet((int)ClientPackets.playerUseWeapon))
+        {
+            _packet.Write(useWeapon);
+
+            if(useWeapon){
+                _packet.Write(pos);
+            }
+            SendTCPData(_packet);
+        }
+    }
+
+    public static void GunRotation(Quaternion rot){
+        using (Packet _packet = new Packet((int)ClientPackets.gunRotation))
+        {
+            _packet.Write(rot);
+            SendUDPData(_packet);
+        }
+    }
+
+    /*public static void SpawnBullet (Vector3 shotPos, Quaternion shotRot)
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.spawnBullet))
+        {
+            _packet.Write(shotPos);
+            _packet.Write(shotRot);
+
+            SendTCPData(_packet);
+        }
+    }*/
+
     #endregion
 }

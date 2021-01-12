@@ -12,7 +12,10 @@ public enum ServerPackets
     playerPosition,
     playerProgressBar,
     playerDisconnected,
-    playerRotation
+    playerRotation,
+    playerUseWeapon,
+    gunRotation,
+    spawnBullet
 }
 
 /// <summary>Sent from client to server.</summary>
@@ -21,6 +24,8 @@ public enum ClientPackets
     welcomeReceived = 1,
     playerMovement = 2,
     playerCollection = 3,
+    playerUseWeapon = 4,
+    gunRotation = 5
 }
 
 public class Packet : IDisposable
