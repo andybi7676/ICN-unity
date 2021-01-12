@@ -31,8 +31,15 @@ public class ClientHandle : MonoBehaviour
     {
         int _id = _packet.ReadInt();
         Vector2 _position = _packet.ReadVector2();
-        //Debug.Log(_id+ ", pos: "+ _position);
-        GameManager.players[_id].transform.GetChild(2).GetComponent<Rigidbody2D>().MovePosition(new Vector3(_position.x, _position.y, GameManager.players[_id].transform.GetChild(2).position.z));
+        Transform astronaut = GameManager.players[_id].transform.GetChild(2);
+        /*Vector2 astronautPos = new Vector2(astronaut.position.x, astronaut.position.y);
+        Vector2 posDiff = _position - astronautPos;
+        int xAnim = posDiff.x > 0? 1: (posDiff.x ==0? 0: -1);
+        Debug.Log("Animation "+xAnim);
+        int yAnim = posDiff.y > 0? 1: (posDiff.y ==0? 0: -1);
+        astronaut.GetComponent<playerMovement>().animator.SetFloat("Horizontal", xAnim);
+        astronaut.GetComponent<playerMovement>().animator.SetFloat("Vertical", yAnim);*/
+        astronaut.GetComponent<Rigidbody2D>().MovePosition(new Vector3(_position.x, _position.y, astronaut.position.z));
     }
 
     public static void PlayerDisconnected(Packet _packet){
