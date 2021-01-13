@@ -13,7 +13,7 @@ public class Weapon : MonoBehaviour {
     // public Animator camAnim;
 
     private float timeBtwShots;
-    public float startTimeBtwShots;
+    public static float startTimeBtwShots = (float)1.8;
 
     private void Update()
     {

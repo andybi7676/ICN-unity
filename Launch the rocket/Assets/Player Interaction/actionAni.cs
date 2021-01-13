@@ -15,7 +15,8 @@ public class actionAni : MonoBehaviour
     public Animation animation;
     public CharacterStats cs;
     public Rigidbody2D rb;
-    public static int increment = 100;
+    public static int increment = 10;
+    public bool walkContinue = false;
 
     public CPB coalSlider;
     public CPB waterSlider;
@@ -35,10 +36,11 @@ public class actionAni : MonoBehaviour
 
       if(Input.GetButtonDown("Horizontal")||Input.GetButtonDown("Vertical")){
         cs = CharacterStats.Walk;
-      }else if(Input.GetButtonUp("Horizontal")||Input.GetButtonUp("Vertical")){
+      }else if(Input.GetButtonUp("Horizontal")||Input.GetButtonUp("Vertical") && !walkContinue){
         cs = CharacterStats.Idle;
       }
-      if(cs == CharacterStats.Idle){
+      if(cs == CharacterStats.Idle && !walkContinue)
+        {
         anim.SetBool("walk",false);
       }
       if(cs == CharacterStats.Walk){
@@ -64,18 +66,21 @@ public class actionAni : MonoBehaviour
         if (Client.instance.myId!= transform.parent.GetComponent<PlayerManager>().id){
           return;
         }
-        if (aaa.gameObject.tag == "Coal" && Input.GetKeyDown(KeyCode.Space)){
+        if (aaa.gameObject.tag == "Coal" && Input.GetKeyDown(KeyCode.Space) && cs != CharacterStats.Idle){
             anim.SetBool("coal",true);
             rb.constraints = RigidbodyConstraints2D.FreezePosition| RigidbodyConstraints2D.FreezeRotation;
             anim.SetBool("increase_coal",true);
             ClientSend.PlayerCollected("coal");
+            anim.SetBool("walk", true);
             StartCoroutine(actionTime());
         }
-        if (aaa.gameObject.tag == "Metal" && Input.GetKeyDown(KeyCode.Space)){
+        if (aaa.gameObject.tag == "Metal" && Input.GetKeyDown(KeyCode.Space) && cs != CharacterStats.Idle)
+        {
             anim.SetBool("metal",true);
             rb.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
             anim.SetBool("increase_metal",true);
             ClientSend.PlayerCollected("metal");
+            anim.SetBool("walk", true);
             StartCoroutine(actionTime());
         }
         if (aaa.gameObject.tag == "lab" && Input.GetKeyDown(KeyCode.Space)){
@@ -146,11 +151,13 @@ public class actionAni : MonoBehaviour
             Debug.Log("not collect !");
             return;
         }
-        if (aaa.gameObject.tag == "Water" && Input.GetKeyDown(KeyCode.Space)){
+        if (aaa.gameObject.tag == "Water" && Input.GetKeyDown(KeyCode.Space) && cs != CharacterStats.Idle)
+        {
             anim.SetBool("water",true);
             rb.constraints = RigidbodyConstraints2D.FreezePosition |RigidbodyConstraints2D.FreezeRotation;
             anim.SetBool("increase_water",true);
             ClientSend.PlayerCollected("water");
+            anim.SetBool("walk", true);
             StartCoroutine(actionTime());
         }
     }

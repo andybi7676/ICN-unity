@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement; //SceneManager
 
 public class countdownTimer : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class countdownTimer : MonoBehaviour
                 Debug.Log("Time has run out!");
                 timeRemaining = 0;
                 timerIsRunning = false;
+                SceneManager.LoadScene(2);
             }
         }
     }
